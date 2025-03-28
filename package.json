@@ -1,0 +1,56 @@
+{
+  "name": "ideogram-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP implementation for Ideogram AI API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "ideogram",
+    "ai",
+    "image-generation",
+    "cursor",
+    "model-context-protocol",
+    "image-editing",
+    "image-description"
+  ],
+  "author": "flowluap",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowluap/ideogram-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flowluap/ideogram-mcp-server/issues"
+  },
+  "homepage": "https://github.com/flowluap/ideogram-mcp-server#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "axios": "^1.6.7",
+    "form-data": "^4.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+} 
