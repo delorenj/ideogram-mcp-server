@@ -24,12 +24,12 @@ cd ideogram-mcp-server
 
 2. Install dependencies
 ```bash
-npm install
+pnpm install
 ```
 
 3. Build the project
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Cursor Integration
@@ -40,8 +40,8 @@ To use this MCP in Cursor, add the following configuration to your Cursor settin
 {
   "mcps": {
     "ideogram-mcp": {
-      "command": "node",
-      "args": ["PATH_TO_YOUR_DIST/index.js"],
+      "command": "pnpx",
+      "args": ["ideogram-mcp-server"],
       "env": {
         "IDEOGRAM_API_KEY": "your-api-key-here"
       }
@@ -59,8 +59,8 @@ Example (redacted):
 {
   "mcps": {
     "ideogram-mcp": {
-      "command": "node",
-      "args": ["/path/to/ideogram-mcp-server/dist/index.js"],
+      "command": "pnpx",
+      "args": ["ideogram-mcp-server"],
       "env": {
         "IDEOGRAM_API_KEY": "xxxxx-REDACTED-xxxxx"
       }
@@ -111,16 +111,16 @@ Example (redacted):
 
 ```bash
 # Build the project
-npm run build
+pnpm run build
 
 # Run in development mode
-npm run dev
+pnpm run dev
 
 # Run tests
-npm test
+pnpm test
 
 # Run linter
-npm run lint
+pnpm run lint
 ```
 
 ## Requirements
