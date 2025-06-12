@@ -18,7 +18,7 @@ A Model Context Protocol (MCP) server implementation for the Ideogram AI API. Th
 
 1. Clone the repository
 ```bash
-git clone https://github.com/flowluap/ideogram-mcp-server.git
+git clone https://github.com/delorenj/ideogram-mcp-server.git
 cd ideogram-mcp-server
 ```
 
@@ -138,4 +138,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
-5. Create a new Pull Request 
+5. Create a new Pull Request
