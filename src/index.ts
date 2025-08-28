@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Ideogram MCP Server Entry Point  
- * Routes to FastMCP implementation
+ * Ideogram MCP Server Entry Point
+ * Main server implementation
  */
 
-// Use FastMCP implementation
-import './fastmcp/server.js';
+// Start the Ideogram MCP Server
+import './server.js';
