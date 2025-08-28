@@ -22,7 +22,7 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
     name: 'generate',
     description: 'Generate images using Ideogram AI with customizable parameters',
     parameters: {
-      "~standard": 1,
+      "~standard": {} as any,
       type: 'object',
       properties: {
         prompt: { type: 'string', description: 'Text prompt for image generation' },
