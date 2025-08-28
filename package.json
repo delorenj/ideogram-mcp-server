@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "MCP implementation for Ideogram V3 API",
   "main": "dist/server.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/server.d.ts",
   "type": "module",
   "bin": {
     "ideogram-mcp-server": "dist/server.js"
