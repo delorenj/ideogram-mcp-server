@@ -93,7 +93,16 @@ Efficiently download multiple generated images to your local system.
 
 ## Development
 
+### Prerequisites
+- Node.js >= 20.0.0 (required for eventsource-parser dependency)
+- pnpm 8+ (not npm!)
+- Ideogram API key
+
+### Local Development
 ```bash
+# Install dependencies
+pnpm install
+
 # Build the project
 pnpm run build
 
@@ -107,9 +116,28 @@ pnpm test
 pnpm run lint
 ```
 
+### Docker Build
+The project includes Docker support for containerized deployment:
+
+```bash
+# Build the Docker image
+docker build -t ideogram-mcp-server .
+
+# Run the container
+docker run -p 3000:3000 -e IDEOGRAM_API_KEY=your-api-key ideogram-mcp-server
+```
+
+### Smithery.ai Support
+The project includes `smithery.yaml` configuration for deployment on Smithery.ai platform. The configuration includes:
+- Multi-stage build process with Node.js 20+
+- Health checks and resource limits
+- Monitoring and metrics support
+- Automated build pipeline
+
 ## Requirements
 
-- Node.js >= 18.0.0
+- Node.js >= 20.0.0
+- pnpm >= 8.0.0
 - Ideogram API key
 
 ## License
