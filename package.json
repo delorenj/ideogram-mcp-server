@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
-    "ideogram-mcp-server": "dist/index.js"
+    "ideogram-mcp-server": "dist/fastmcp/server.js"
   },
   "files": [
     "dist/**/*",
