@@ -15,11 +15,24 @@ export function createDownloadTool(fileManager: FileManager) {
   return {
     name: 'download_images',
     description: 'Download images from URLs to a specified directory with parallel processing',
-    parameters: downloadSchema,
+    parameters: {
+      "~standard": 1,
+      type: 'object',
+      properties: {
+        urls: { 
+          type: 'array',
+          items: { type: 'string', format: 'uri' },
+          minItems: 1,
+          description: 'Array of image URLs to download'
+        },
+        output_dir: { type: 'string', description: 'Directory path where images will be saved' }
+      },
+      required: ['urls', 'output_dir']
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = downloadSchema.parse(args);
       try {
-        const result = await fileManager.downloadImages(args.urls, args.output_dir);
+        const result = await fileManager.downloadImages(validatedArgs.urls, validatedArgs.output_dir);
         
         if (!result.success && (!result.results || result.results.length === 0)) {
           return `❌ Download failed: ${result.error}`;
@@ -56,7 +69,7 @@ export function createDownloadTool(fileManager: FileManager) {
           response += '\n';
         }
 
-        response += `📁 **Output directory**: ${args.output_dir}\n`;
+        response += `📁 **Output directory**: ${validatedArgs.output_dir}\n`;
         response += `💡 **Tip**: Downloaded images are ready for use with edit or describe tools.`;
 
         return response;
