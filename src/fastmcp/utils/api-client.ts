@@ -43,7 +43,7 @@ export class IdeogramApiClient {
 
       return {
         success: true,
-        data: response.data,
+        data: response.data as T,
         status: response.status
       };
     } catch (error) {
