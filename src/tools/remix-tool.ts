@@ -35,7 +35,7 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
         num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
       },
       required: ['image_file', 'prompt']
-    },
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = remixSchema.parse(args);
       try {
