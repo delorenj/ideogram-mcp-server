@@ -5,9 +5,9 @@
 
 import { z } from 'zod';
 import FormData from 'form-data';
-import { IdeogramApiClient } from '../utils/api-client';
-import { FileManager } from '../utils/file-manager';
-import { ImageDescriptionResponse } from '../types/index';
+import { IdeogramApiClient } from '../utils/api-client.js';
+import { FileManager } from '../utils/file-manager.js';
+import { ImageDescriptionResponse } from '../types/index.js';
 
 const describeSchema = z.object({
   image_file: z.string().min(1, 'Image file is required')
