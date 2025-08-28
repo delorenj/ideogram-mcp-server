@@ -4,7 +4,7 @@
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { IdeogramConfig, ApiResponse, IdeogramApiError } from '../types/index.js';
+import { IdeogramConfig, ApiResponse, IdeogramApiError } from '../types/index';
 
 export class IdeogramApiClient {
   private axiosInstance: AxiosInstance;
