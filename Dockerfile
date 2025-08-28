@@ -1,20 +1,18 @@
 # Use Node.js 20+ as required by dependencies
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Install pnpm globally with specific version
-RUN corepack enable && corepack prepare pnpm@8.15.9 --activate
+# Install pnpm using corepack (built into Node 20)
+RUN corepack enable
 
-# Copy package files first for better caching
+# Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml .npmrc ./
-
-# Copy scripts needed for preinstall check
 COPY scripts/ ./scripts/
 
-# Install dependencies with timeout and retry
-RUN pnpm install --frozen-lockfile --fetch-timeout=300000
+# Install all dependencies at once
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY tsconfig.json ./
@@ -23,26 +21,16 @@ COPY src/ ./src/
 # Build the TypeScript project
 RUN pnpm run build
 
-# Production stage
-FROM node:20-alpine AS production
-
-# Install pnpm in production stage
-RUN corepack enable && corepack prepare pnpm@8.15.9 --activate
-
-WORKDIR /app
-
-# Copy package files
-COPY package.json pnpm-lock.yaml .npmrc ./
-COPY scripts/ ./scripts/
-
-# Install only production dependencies
-RUN pnpm install --frozen-lockfile --prod --fetch-timeout=300000
-
-# Copy built application from builder stage
-COPY --from=builder /app/dist ./dist
+# Remove dev dependencies to reduce image size
+RUN pnpm prune --prod
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
+
+# Change ownership of app directory to nodejs user
+RUN chown -R nodejs:nodejs /app
+
+# Switch to non-root user
 USER nodejs
 
 # Expose the port
