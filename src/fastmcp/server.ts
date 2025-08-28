@@ -12,7 +12,11 @@ import {
   createGenerateTool,
   createEditTool,
   createDescribeTool,
-  createDownloadTool
+  createDownloadTool,
+  createRemixTool,
+  createReframeTool,
+  createReplaceBackgroundTool,
+  createUpscaleTool
 } from './tools/index.js';
 
 // Configuration
