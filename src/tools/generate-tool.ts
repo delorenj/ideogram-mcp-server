@@ -28,13 +28,13 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
         // Prepare request payload
         const payload = {
           image_request: {
-            prompt: args.prompt,
-            aspect_ratio: args.aspect_ratio || 'ASPECT_1_1',
-            model: args.model || 'V_2',
-            magic_prompt_option: args.magic_prompt_option || 'AUTO',
-            seed: args.seed,
-            style_type: args.style_type,
-            num_images: args.num_images || 1
+            prompt: validatedArgs.prompt,
+            aspect_ratio: validatedArgs.aspect_ratio || 'ASPECT_1_1',
+            model: validatedArgs.model || 'V_2',
+            magic_prompt_option: validatedArgs.magic_prompt_option || 'AUTO',
+            seed: validatedArgs.seed,
+            style_type: validatedArgs.style_type,
+            num_images: validatedArgs.num_images || 1
           }
         };
 
