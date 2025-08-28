@@ -18,7 +18,7 @@ export function createDescribeTool(apiClient: IdeogramApiClient, fileManager: Fi
     name: 'describe',
     description: 'Get detailed descriptions of images using Ideogram AI vision capabilities',
     parameters: {
-      "~standard": 1,
+      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to describe' }
