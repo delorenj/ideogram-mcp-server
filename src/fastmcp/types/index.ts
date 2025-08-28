@@ -47,6 +47,11 @@ export interface ImageDescriptionResponse {
   descriptions: ImageDescription[];
 }
 
+export interface ImageUpscaleResponse {
+  created: string;
+  data: ImageData[];
+}
+
 export interface DownloadResult {
   success: boolean;
   results: Array<{
