@@ -1,47 +1,22 @@
 # Ideogram MCP Server
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/node/v/ideogram-mcp-server)](https://nodejs.org)
-[![npm version](https://badge.fury.io/js/ideogram-mcp-server.svg)](https://badge.fury.io/js/ideogram-mcp-server)
 
-A Model Context Protocol (MCP) server implementation for the Ideogram AI API. This server provides tools for generating, editing, and describing images using Ideogram's powerful AI models.
+A Model Context Protocol (MCP) server implementation for the Ideogram AI API. This server provides tools for generating, editing, and describing images using Ideogram's powerful new V3 generative API.
 
 ## Features
-
-- Generate images from text descriptions
-- Edit existing images using masks
-- Generate descriptions for images
-- Download generated images to local directory
-- Prompt templates for common operations
+#TODO: Add features list for v3 https://developer.ideogram.ai/api-reference/api-reference/generate-v3
 
 ## Installation
 
-1. Clone the repository
-```bash
-git clone https://github.com/delorenj/ideogram-mcp-server.git
-cd ideogram-mcp-server
-```
 
-2. Install dependencies
-```bash
-pnpm install
-```
-
-3. Build the project
-```bash
-pnpm run build
-```
-
-## Cursor Integration
-
-To use this MCP in Cursor, add the following configuration to your Cursor settings (Settings > AI > Model Context Protocol):
 
 ```json
 {
-  "mcps": {
-    "ideogram-mcp": {
+  "mcpServers": {
+    "ideogram-v3-tools": {
       "command": "pnpx",
-      "args": ["ideogram-mcp-server"],
+      "args": ["@delorenj/ideogram-mcp-server"],
       "env": {
         "IDEOGRAM_API_KEY": "your-api-key-here"
       }
@@ -50,26 +25,9 @@ To use this MCP in Cursor, add the following configuration to your Cursor settin
 }
 ```
 
-Replace:
-- `PATH_TO_YOUR_DIST/index.js` with the absolute path to your built `index.js` file
-- `your-api-key-here` with your actual Ideogram API key
-
-Example (redacted):
-```json
-{
-  "mcps": {
-    "ideogram-mcp": {
-      "command": "pnpx",
-      "args": ["ideogram-mcp-server"],
-      "env": {
-        "IDEOGRAM_API_KEY": "xxxxx-REDACTED-xxxxx"
-      }
-    }
-  }
-}
-```
 
 ## Available Tools
+# TODO: Update tools for v3 https://developer.ideogram.ai/api-reference/api-reference/generate-v3
 
 1. `generate`
    - Generate images from text prompts
@@ -139,3 +97,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 3. Commit your changes
 4. Push to the branch
 5. Create a new Pull Request
+
+# TODO: Add a 'made with love' footer and fit in thera somehow that I have always LOVED ideogram since the day it launched and have yet to find a better all around experience.

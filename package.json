@@ -1,12 +1,12 @@
 {
   "name": "ideogram-mcp-server",
-  "version": "1.0.0",
-  "description": "MCP implementation for Ideogram AI API",
-  "main": "dist/fastmcp/server.js",
+  "version": "3.0.0",
+  "description": "MCP implementation for Ideogram V3 API",
+  "main": "dist/server.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
-    "ideogram-mcp-server": "dist/fastmcp/server.js"
+    "ideogram-mcp-server": "dist/server.js"
   },
   "files": [
     "dist/**/*",
@@ -20,8 +20,8 @@
   "scripts": {
     "preinstall": "node scripts/check-pnpm.js",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/fastmcp/server.js", 
-    "dev": "tsx src/fastmcp/server.ts",
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "prepare": "pnpm run build"
@@ -30,13 +30,15 @@
     "mcp",
     "ideogram",
     "ai",
+    "claude-code",
+    "gptme",
+    "opencode",
     "image-generation",
-    "cursor",
     "model-context-protocol",
     "image-editing",
     "image-description"
   ],
-  "author": "delorenj",
+  "author": "Jarad DeLorenzo <delorenj>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -70,3 +72,4 @@
     "typescript": "^5.3.3"
   }
 }
+
