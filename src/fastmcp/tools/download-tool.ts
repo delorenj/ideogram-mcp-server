@@ -4,7 +4,7 @@
  */
 
 import { z } from 'zod';
-import { FileManager } from '../utils/file-manager';
+import { FileManager } from '../utils/file-manager.js';
 
 const downloadSchema = z.object({
   urls: z.array(z.string().url()).min(1, 'At least one URL is required'),
