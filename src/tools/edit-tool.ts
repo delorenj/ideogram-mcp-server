@@ -24,16 +24,17 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
     name: 'edit',
     description: 'Edit images using Ideogram AI with mask-based inpainting',
     parameters: editSchema,
-    execute: async (args: z.infer<typeof editSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = editSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
 
         // Read and validate mask file
-        const maskResult = await fileManager.readImageFile(args.mask);
+        const maskResult = await fileManager.readImageFile(validatedArgs.mask);
         if (!maskResult.success || !maskResult.data) {
           return `❌ Failed to read mask file: ${maskResult.error}`;
         }
@@ -41,11 +42,11 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
         // Create FormData for multipart upload
         const formData = new FormData();
         formData.append('image_request', JSON.stringify({
-          prompt: args.prompt,
-          model: args.model || 'V_2',
-          magic_prompt_option: args.magic_prompt_option || 'AUTO',
-          seed: args.seed,
-          num_images: args.num_images || 1
+          prompt: validatedArgs.prompt,
+          model: validatedArgs.model || 'V_2',
+          magic_prompt_option: validatedArgs.magic_prompt_option || 'AUTO',
+          seed: validatedArgs.seed,
+          num_images: validatedArgs.num_images || 1
         }));
         formData.append('image_file', imageResult.data, {
           filename: 'image.jpg',
@@ -78,9 +79,9 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
           if (image.is_image_safe === false) {
             result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
           }
-          result += `🎨 **Model**: ${args.model || 'V_2'}\n`;
-          if (args.seed) {
-            result += `🌱 **Seed**: ${args.seed}\n`;
+          result += `🎨 **Model**: ${validatedArgs.model || 'V_2'}\n`;
+          if (validatedArgs.seed) {
+            result += `🌱 **Seed**: ${validatedArgs.seed}\n`;
           }
           result += '\n';
         });
