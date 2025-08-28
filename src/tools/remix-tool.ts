@@ -23,7 +23,19 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
   return {
     name: 'remix',
     description: 'Remix existing images with new prompts using Ideogram v3',
-    parameters: remixSchema,
+    parameters: {
+      type: 'object',
+      properties: {
+        image_file: { type: 'string', description: 'Path to the image file to remix' },
+        prompt: { type: 'string', description: 'Text prompt for the remix' },
+        model: { type: 'string', enum: ['V_1', 'V_2', 'V_2_TURBO'], description: 'Model version to use' },
+        magic_prompt_option: { type: 'string', enum: ['AUTO', 'ON', 'OFF'], description: 'Magic prompt enhancement' },
+        seed: { type: 'number', minimum: 0, maximum: 2147483647, description: 'Random seed for reproducibility' },
+        style_type: { type: 'string', enum: ['AUTO', 'GENERAL', 'REALISTIC', 'DESIGN', 'RENDER_3D', 'ANIME'], description: 'Style type' },
+        num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
+      },
+      required: ['image_file', 'prompt']
+    },
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = remixSchema.parse(args);
       try {
