@@ -36,7 +36,7 @@ COPY package.json pnpm-lock.yaml .npmrc ./
 COPY scripts/ ./scripts/
 
 # Install only production dependencies
-RUN pnpm install --frozen-lockfile --prod --network-timeout=300000
+RUN pnpm install --frozen-lockfile --prod --fetch-timeout=300000
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
