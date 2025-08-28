@@ -24,6 +24,7 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
     name: 'remix',
     description: 'Remix existing images with new prompts using Ideogram v3',
     parameters: {
+      "~standard": 1,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to remix' },
