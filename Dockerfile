@@ -14,7 +14,7 @@ COPY package.json pnpm-lock.yaml .npmrc ./
 COPY scripts/ ./scripts/
 
 # Install dependencies with timeout and retry
-RUN pnpm install --frozen-lockfile --network-timeout 300000
+RUN pnpm install --frozen-lockfile --network-timeout=300000
 
 # Copy source code
 COPY tsconfig.json ./
