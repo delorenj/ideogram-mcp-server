@@ -4,7 +4,7 @@
  */
 
 import { z } from 'zod';
-import * as FormData from 'form-data';
+import FormData from 'form-data';
 import { IdeogramApiClient } from '../utils/api-client.js';
 import { FileManager } from '../utils/file-manager.js';
 import { ImageEditResponse } from '../types/index.js';
