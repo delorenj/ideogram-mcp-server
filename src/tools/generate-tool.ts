@@ -58,10 +58,10 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
           if (image.is_image_safe === false) {
             result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
           }
-          result += `📏 **Resolution**: Based on ${args.aspect_ratio || 'ASPECT_1_1'}\n`;
-          result += `🎨 **Model**: ${args.model || 'V_2'}\n`;
-          if (args.seed) {
-            result += `🌱 **Seed**: ${args.seed}\n`;
+          result += `📏 **Resolution**: Based on ${validatedArgs.aspect_ratio || 'ASPECT_1_1'}\n`;
+          result += `🎨 **Model**: ${validatedArgs.model || 'V_2'}\n`;
+          if (validatedArgs.seed) {
+            result += `🌱 **Seed**: ${validatedArgs.seed}\n`;
           }
           result += '\n';
         });
