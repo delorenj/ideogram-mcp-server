@@ -2,7 +2,7 @@
   "name": "ideogram-mcp-server",
   "version": "1.0.0",
   "description": "MCP implementation for Ideogram AI API",
-  "main": "dist/index.js",
+  "main": "dist/fastmcp/server.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
