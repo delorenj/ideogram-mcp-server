@@ -51,6 +51,10 @@ server.addTool(createGenerateTool(apiClient));
 server.addTool(createEditTool(apiClient, fileManager));
 server.addTool(createDescribeTool(apiClient, fileManager));
 server.addTool(createDownloadTool(fileManager));
+server.addTool(createRemixTool(apiClient, fileManager));
+server.addTool(createReframeTool(apiClient, fileManager));
+server.addTool(createReplaceBackgroundTool(apiClient, fileManager));
+server.addTool(createUpscaleTool(apiClient, fileManager));
 
 // Start the server
 async function startServer() {
