@@ -24,7 +24,6 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
     name: 'edit',
     description: 'Edit images using Ideogram AI with mask-based inpainting',
     parameters: {
-      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to edit' },
@@ -37,7 +36,7 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
       },
       required: ['image_file', 'mask', 'prompt']
     } as const,
-    execute: async (args: unknown): Promise<string> => {
+        execute: async (args: unknown): Promise<string> => {
       const validatedArgs = editSchema.parse(args);
       try {
         // Read and validate image file

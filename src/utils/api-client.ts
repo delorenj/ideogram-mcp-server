@@ -35,7 +35,7 @@ export class IdeogramApiClient {
     );
   }
 
-  async post<T = any>(endpoint: string, data: any, headers?: Record<string, string>): Promise<ApiResponse<T>> {
+  async post<T = unknown>(endpoint: string, data: unknown, headers?: Record<string, string>): Promise<ApiResponse<T>> {
     try {
       const response = await this.axiosInstance.post<T>(endpoint, data, headers ? {
         headers: { ...headers }

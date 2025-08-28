@@ -21,7 +21,6 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
     name: 'upscale',
     description: 'Upscale images to higher resolution using Ideogram upscaling technology',
     parameters: {
-      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to upscale' },
@@ -31,7 +30,7 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
       },
       required: ['image_file']
     } as const,
-    execute: async (args: unknown): Promise<string> => {
+        execute: async (args: unknown): Promise<string> => {
       const validatedArgs = upscaleSchema.parse(args);
       try {
         // Read and validate image file

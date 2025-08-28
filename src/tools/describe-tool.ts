@@ -18,14 +18,13 @@ export function createDescribeTool(apiClient: IdeogramApiClient, fileManager: Fi
     name: 'describe',
     description: 'Get detailed descriptions of images using Ideogram AI vision capabilities',
     parameters: {
-      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to describe' }
       },
       required: ['image_file']
     } as const,
-    execute: async (args: unknown): Promise<string> => {
+        execute: async (args: unknown): Promise<string> => {
       const validatedArgs = describeSchema.parse(args);
       try {
         // Read and validate image file

@@ -10,7 +10,7 @@ export interface IdeogramConfig {
   maxImages: number;
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -20,7 +20,7 @@ export interface ApiResponse<T = any> {
 export interface IdeogramApiError {
   message: string;
   code?: string;
-  details?: any;
+  details?: unknown;
 }
 
 export interface ImageData {

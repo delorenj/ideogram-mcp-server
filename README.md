@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A Model Context Protocol (MCP) server implementation for the Ideogram AI API. This server provides tools for generating, editing, and describing images using Ideogram's powerful new V3 generative API.
+A FastMCP server for the Ideogram AI API. This server provides tools for generating, editing, and describing images using Ideogram's powerful V3 generative API.
 
 ## Features
 
@@ -20,13 +20,11 @@ A Model Context Protocol (MCP) server implementation for the Ideogram AI API. Th
 
 ## Installation
 
-
-
 ```json
 {
   "mcpServers": {
     "ideogram-v3-tools": {
-      "command": "pnpx",
+      "command": "bunx",
       "args": ["@delorenj/ideogram-mcp-server"],
       "env": {
         "IDEOGRAM_API_KEY": "your-api-key-here"
@@ -35,7 +33,6 @@ A Model Context Protocol (MCP) server implementation for the Ideogram AI API. Th
   }
 }
 ```
-
 
 ## Available Tools
 
@@ -84,18 +81,11 @@ Efficiently download multiple generated images to your local system.
 - `filename_prefix`: string (optional) - Custom prefix for downloaded files
 - `preserve_metadata`: boolean (optional) - Save generation metadata alongside images
 
-### Prompt Templates
-
-1. `generate_image`
-   - Template for generating images
-   - Parameters:
-     - `description`: string
-
 ## Development
 
 ### Prerequisites
-- Node.js >= 20.0.0 (required for eventsource-parser dependency)
-- bun 1+ (not npm or pnpm!)
+- Node.js >= 20.0.0
+- bun >= 1.0.0
 - Ideogram API key
 
 ### Local Development
@@ -116,24 +106,6 @@ bun test
 bun run lint
 ```
 
-### Docker Build
-The project includes Docker support for containerized deployment:
-
-```bash
-# Build the Docker image
-docker build -t ideogram-mcp-server .
-
-# Run the container
-docker run -p 3000:3000 -e IDEOGRAM_API_KEY=your-api-key ideogram-mcp-server
-```
-
-### Smithery.ai Support
-The project includes `smithery.yaml` configuration for deployment on Smithery.ai platform. The configuration includes:
-- Multi-stage build process with Node.js 20+
-- Health checks and resource limits
-- Monitoring and metrics support
-- Automated build pipeline
-
 ## Requirements
 
 - Node.js >= 20.0.0
@@ -153,11 +125,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 5. Create a new Pull Request
 
 ---
-
-## 💝 Made with Love for Ideogram
-
-This MCP server was crafted with genuine love for Ideogram's incredible platform. Since launch, I've been using it - and every other service out there. No one has yet been able to match their balance of "keep it simple...but kinda let them go bonkers if that's their thing". This is my way of making Ideogram's capabilities even more accessible to developers and creators worldwide.
-
-...that, and I need this and got tired of waiting for someone to make it.
 
 *Built with ❤️ by someone who truly believes Ideogram is changing the creative landscape.*

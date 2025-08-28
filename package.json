@@ -1,7 +1,7 @@
 {
   "name": "ideogram-mcp-server",
-  "version": "3.0.2",
-  "description": "MCP implementation for Ideogram V3 API",
+  "version": "3.1.0",
+  "description": "A FastMCP server for the Ideogram AI API.",
   "main": "dist/server.js",
   "types": "dist/server.d.ts",
   "type": "module",
@@ -19,10 +19,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "build:smithery": "echo 'Smithery build currently disabled due to bundling conflicts with FastMCP dependencies. Using TypeScript build instead.' && npm run build",
     "start": "node dist/server.js",
     "dev": "tsx src/server.ts",
-    "dev:smithery": "echo 'Using standard dev mode - Smithery dev conflicts with FastMCP stdio transport' && npm run dev",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },
@@ -60,7 +58,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@smithery/cli": "^1.2.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.19",
     "@typescript-eslint/eslint-plugin": "^7.0.1",

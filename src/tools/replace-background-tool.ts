@@ -23,7 +23,6 @@ export function createReplaceBackgroundTool(apiClient: IdeogramApiClient, fileMa
     name: 'replace_background',
     description: 'Replace the background of images with new scenes using Ideogram v3',
     parameters: {
-      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to process' },
@@ -35,7 +34,7 @@ export function createReplaceBackgroundTool(apiClient: IdeogramApiClient, fileMa
       },
       required: ['image_file', 'prompt']
     } as const,
-    execute: async (args: unknown): Promise<string> => {
+        execute: async (args: unknown): Promise<string> => {
       const validatedArgs = replaceBackgroundSchema.parse(args);
       try {
         // Read and validate image file

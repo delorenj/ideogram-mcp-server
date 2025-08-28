@@ -24,7 +24,6 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
     name: 'remix',
     description: 'Remix existing images with new prompts using Ideogram v3',
     parameters: {
-      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to remix' },
@@ -37,7 +36,7 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
       },
       required: ['image_file', 'prompt']
     } as const,
-    execute: async (args: unknown): Promise<string> => {
+        execute: async (args: unknown): Promise<string> => {
       const validatedArgs = remixSchema.parse(args);
       try {
         // Read and validate image file
