@@ -23,7 +23,8 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
     name: 'reframe',
     description: 'Reframe existing images to different aspect ratios using Ideogram v3',
     parameters: reframeSchema,
-    execute: async (args: z.infer<typeof reframeSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = reframeSchema.parse(args);
       try {
         // Read and validate image file
         const imageResult = await fileManager.readImageFile(args.image_file);
