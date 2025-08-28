@@ -7,13 +7,14 @@ WORKDIR /app
 # Install pnpm globally
 RUN npm install -g pnpm@8
 
-# Copy package files
+# Copy package files and scripts needed for preinstall
 COPY package.json pnpm-lock.yaml .npmrc ./
+COPY scripts/ ./scripts/
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Copy source code
+# Copy remaining source code
 COPY . .
 
 # Build the TypeScript project
