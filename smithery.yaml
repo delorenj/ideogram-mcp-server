@@ -1,21 +1,21 @@
 name: ideogram-mcp-server
-version: 3.0.0
+version: 3.0.1
 
 # Build configuration
 build:
   dockerfile: Dockerfile
   context: .
-  timeout: 600s  # 10 minute timeout for builds
-  
+  timeout: 600s # 10 minute timeout for builds
+
   # Build arguments
   args:
     NODE_VERSION: "20"
-    PNPM_VERSION: "8.15.9"
+    BUN_VERSION: "1.2.21"
 
 # Runtime configuration
 runtime:
   port: 3000
-  
+
   # Environment variables
   env:
     NODE_ENV: production
@@ -44,15 +44,16 @@ build_config:
 dependencies:
   - name: node
     version: ">=20.0.0"
-  - name: pnpm
-    version: ">=8.0.0"
+  - name: bun
+    version: ">=1.2.21"
 
 # Deployment configuration
 deploy:
   strategy: rolling
   replicas: 1
   timeout: 300s
-  
+
 # Monitoring - simplified
 monitoring:
-  enabled: false  # Disable to reduce startup overhead
+  enabled: false # Disable to reduce startup overhead
+
