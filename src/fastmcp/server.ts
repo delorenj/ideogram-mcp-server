@@ -16,7 +16,7 @@ import {
 } from './tools/index.js';
 
 // Configuration
-const IDEOGRAM_API_BASE = "https://api.ideogram.ai";
+const IDEOGRAM_API_BASE = "https://api.ideogram.ai/v1";
 const API_KEY = process.env.IDEOGRAM_API_KEY;
 
 if (!API_KEY) {
