@@ -18,10 +18,11 @@ export function createDescribeTool(apiClient: IdeogramApiClient, fileManager: Fi
     name: 'describe',
     description: 'Get detailed descriptions of images using Ideogram AI vision capabilities',
     parameters: describeSchema,
-    execute: async (args: z.infer<typeof describeSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = describeSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
