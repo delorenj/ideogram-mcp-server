@@ -5,15 +5,15 @@
  */
 
 import { FastMCP } from 'fastmcp';
-import { IdeogramApiClient } from './utils/api-client';
-import { FileManager } from './utils/file-manager';
-import { IdeogramConfig } from './types/index';
+import { IdeogramApiClient } from './utils/api-client.js';
+import { FileManager } from './utils/file-manager.js';
+import { IdeogramConfig } from './types/index.js';
 import {
   createGenerateTool,
   createEditTool,
   createDescribeTool,
   createDownloadTool
-} from './tools/index';
+} from './tools/index.js';
 
 // Configuration
 const IDEOGRAM_API_BASE = "https://api.ideogram.ai";
