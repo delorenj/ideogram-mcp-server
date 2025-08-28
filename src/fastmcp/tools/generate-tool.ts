@@ -4,8 +4,8 @@
  */
 
 import { z } from 'zod';
-import { IdeogramApiClient } from '../utils/api-client';
-import { ImageGenerationResponse } from '../types/index';
+import { IdeogramApiClient } from '../utils/api-client.js';
+import { ImageGenerationResponse } from '../types/index.js';
 
 const generateSchema = z.object({
   prompt: z.string().min(1, 'Prompt is required'),
