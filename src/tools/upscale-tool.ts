@@ -21,7 +21,7 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
     name: 'upscale',
     description: 'Upscale images to higher resolution using Ideogram upscaling technology',
     parameters: {
-      "~standard": 1,
+      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to upscale' },
