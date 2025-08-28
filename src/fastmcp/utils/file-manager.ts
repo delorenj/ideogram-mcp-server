@@ -5,8 +5,8 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { IdeogramApiClient } from './api-client.js';
-import { DownloadResult } from '../types/index.js';
+import { IdeogramApiClient } from './api-client';
+import { DownloadResult } from '../types/index';
 
 export class FileManager {
   private apiClient: IdeogramApiClient;
