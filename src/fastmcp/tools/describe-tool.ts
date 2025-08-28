@@ -33,8 +33,8 @@ export function createDescribeTool(apiClient: IdeogramApiClient, fileManager: Fi
           contentType: 'image/jpeg'
         });
 
-        // Make API request with FormData
-        const response = await apiClient.post<ImageDescriptionResponse>('/ideogram-v3/describe', formData, {
+        // Make API request with FormData - Note: describe uses /v1/describe not v3 path
+        const response = await apiClient.post<ImageDescriptionResponse>('/describe', formData, {
           'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`
         });
 
