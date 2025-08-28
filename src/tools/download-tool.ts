@@ -16,7 +16,8 @@ export function createDownloadTool(fileManager: FileManager) {
     name: 'download_images',
     description: 'Download images from URLs to a specified directory with parallel processing',
     parameters: downloadSchema,
-    execute: async (args: z.infer<typeof downloadSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = downloadSchema.parse(args);
       try {
         const result = await fileManager.downloadImages(args.urls, args.output_dir);
         
