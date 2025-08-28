@@ -19,10 +19,10 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "build:smithery": "smithery build",
+    "build:smithery": "echo 'Smithery build currently disabled due to bundling conflicts with FastMCP dependencies. Using TypeScript build instead.' && npm run build",
     "start": "node dist/server.js",
     "dev": "tsx src/server.ts",
-    "dev:smithery": "smithery dev",
+    "dev:smithery": "echo 'Using standard dev mode - Smithery dev conflicts with FastMCP stdio transport' && npm run dev",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },
