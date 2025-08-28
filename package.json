@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "dev": "ts-node-esm src/index.ts",
+    "start": "node dist/fastmcp/server.js",
+    "dev": "ts-node-esm src/fastmcp/server.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "prepare": "pnpm run build"
