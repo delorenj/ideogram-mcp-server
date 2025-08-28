@@ -128,6 +128,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💝 Made with Love for Ideogram
 
-This MCP server was crafted with genuine passion for Ideogram's incredible platform. Since Ideogram's launch day, I've been consistently amazed by their innovative approach to AI image generation. After exploring countless alternatives, Ideogram continues to deliver the most comprehensive, intuitive, and powerful creative experience available. This project is a tribute to that excellence and my way of making Ideogram's V3 capabilities even more accessible to developers and creators worldwide.
+This MCP server was crafted with genuine love for Ideogram's incredible platform. Since launch, I've been using it - and every other service out there. No one has yet been able to match their balance of "keep it simple...but kinda let them go bonkers if that's their thing". This is my way of making Ideogram's capabilities even more accessible to developers and creators worldwide.
+
+...that, and I need this and got tired of waiting for someone to make it.
 
 *Built with ❤️ by someone who truly believes Ideogram is changing the creative landscape.*
