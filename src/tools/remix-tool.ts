@@ -24,10 +24,11 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
     name: 'remix',
     description: 'Remix existing images with new prompts using Ideogram v3',
     parameters: remixSchema,
-    execute: async (args: z.infer<typeof remixSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = remixSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
@@ -35,12 +36,12 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
         // Create FormData for multipart upload
         const formData = new FormData();
         formData.append('image_request', JSON.stringify({
-          prompt: args.prompt,
-          model: args.model || 'V_2',
-          magic_prompt_option: args.magic_prompt_option || 'AUTO',
-          seed: args.seed,
-          style_type: args.style_type,
-          num_images: args.num_images || 1
+          prompt: validatedArgs.prompt,
+          model: validatedArgs.model || 'V_2',
+          magic_prompt_option: validatedArgs.magic_prompt_option || 'AUTO',
+          seed: validatedArgs.seed,
+          style_type: validatedArgs.style_type,
+          num_images: validatedArgs.num_images || 1
         }));
         formData.append('image_file', imageResult.data, {
           filename: 'image.jpg',
@@ -69,9 +70,9 @@ export function createRemixTool(apiClient: IdeogramApiClient, fileManager: FileM
           if (image.is_image_safe === false) {
             result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
           }
-          result += `🎨 **Model**: ${args.model || 'V_2'}\n`;
-          if (args.seed) {
-            result += `🌱 **Seed**: ${args.seed}\n`;
+          result += `🎨 **Model**: ${validatedArgs.model || 'V_2'}\n`;
+          if (validatedArgs.seed) {
+            result += `🌱 **Seed**: ${validatedArgs.seed}\n`;
           }
           result += '\n';
         });
