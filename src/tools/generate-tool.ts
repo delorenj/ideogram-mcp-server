@@ -21,7 +21,19 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
   return {
     name: 'generate',
     description: 'Generate images using Ideogram AI with customizable parameters',
-    parameters: generateSchema,
+    parameters: {
+      type: 'object',
+      properties: {
+        prompt: { type: 'string', description: 'Text prompt for image generation' },
+        aspect_ratio: { type: 'string', enum: ['ASPECT_1_1', 'ASPECT_16_9', 'ASPECT_9_16', 'ASPECT_4_3', 'ASPECT_3_4'], description: 'Image aspect ratio' },
+        model: { type: 'string', enum: ['V_1', 'V_2', 'V_2_TURBO'], description: 'Model version to use' },
+        magic_prompt_option: { type: 'string', enum: ['AUTO', 'ON', 'OFF'], description: 'Magic prompt enhancement' },
+        seed: { type: 'number', minimum: 0, maximum: 2147483647, description: 'Random seed for reproducibility' },
+        style_type: { type: 'string', enum: ['AUTO', 'GENERAL', 'REALISTIC', 'DESIGN', 'RENDER_3D', 'ANIME'], description: 'Style type' },
+        num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
+      },
+      required: ['prompt']
+    },
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = generateSchema.parse(args);
       try {
