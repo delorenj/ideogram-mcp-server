@@ -24,7 +24,7 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
     name: 'edit',
     description: 'Edit images using Ideogram AI with mask-based inpainting',
     parameters: {
-      "~standard": 1,
+      "~standard": {} as any,
       type: 'object',
       properties: {
         image_file: { type: 'string', description: 'Path to the image file to edit' },
