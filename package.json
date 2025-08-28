@@ -18,8 +18,9 @@
     "access": "public"
   },
   "scripts": {
+    "preinstall": "node scripts/check-pnpm.js",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/fastmcp/server.js",
+    "start": "node dist/fastmcp/server.js", 
     "dev": "tsx src/fastmcp/server.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
