@@ -20,12 +20,22 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
   return {
     name: 'upscale',
     description: 'Upscale images to higher resolution using Ideogram upscaling technology',
-    parameters: upscaleSchema,
+    parameters: {
+      "~standard": 1,
+      type: 'object',
+      properties: {
+        image_file: { type: 'string', description: 'Path to the image file to upscale' },
+        detail_scale: { type: 'number', minimum: 1, maximum: 5, description: 'Detail enhancement scale (1-5)' },
+        scale_factor: { type: 'number', minimum: 1, maximum: 4, description: 'Size scaling factor (1-4x)' },
+        resemblance: { type: 'number', minimum: 0, maximum: 100, description: 'Resemblance to original (0-100%)' }
+      },
+      required: ['image_file']
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = upscaleSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
@@ -33,9 +43,9 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
         // Create FormData for multipart upload
         const formData = new FormData();
         formData.append('image_request', JSON.stringify({
-          detail_scale: args.detail_scale || 2,
-          scale_factor: args.scale_factor || 2,
-          resemblance: args.resemblance || 80
+          detail_scale: validatedArgs.detail_scale || 2,
+          scale_factor: validatedArgs.scale_factor || 2,
+          resemblance: validatedArgs.resemblance || 80
         }));
         formData.append('image_file', imageResult.data, {
           filename: 'image.jpg',
@@ -64,9 +74,9 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
         if (image.is_image_safe === false) {
           result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
         }
-        result += `📈 **Scale Factor**: ${args.scale_factor || 2}x\n`;
-        result += `🔍 **Detail Scale**: ${args.detail_scale || 2}\n`;
-        result += `🎯 **Resemblance**: ${args.resemblance || 80}%\n`;
+        result += `📈 **Scale Factor**: ${validatedArgs.scale_factor || 2}x\n`;
+        result += `🔍 **Detail Scale**: ${validatedArgs.detail_scale || 2}\n`;
+        result += `🎯 **Resemblance**: ${validatedArgs.resemblance || 80}%\n`;
 
         result += `\n💡 **Tip**: Use the download_images tool to save this upscaled image locally.`;
         
