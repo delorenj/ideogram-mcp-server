@@ -16,7 +16,7 @@ export function createDownloadTool(fileManager: FileManager) {
     name: 'download_images',
     description: 'Download images from URLs to a specified directory with parallel processing',
     parameters: {
-      "~standard": 1,
+      "~standard": {} as any,
       type: 'object',
       properties: {
         urls: { 
