@@ -22,6 +22,7 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
     name: 'generate',
     description: 'Generate images using Ideogram AI with customizable parameters',
     parameters: {
+      "~standard": 1,
       type: 'object',
       properties: {
         prompt: { type: 'string', description: 'Text prompt for image generation' },
@@ -33,7 +34,7 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
         num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
       },
       required: ['prompt']
-    },
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = generateSchema.parse(args);
       try {
