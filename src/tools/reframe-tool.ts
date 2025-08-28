@@ -27,7 +27,7 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
       const validatedArgs = reframeSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
