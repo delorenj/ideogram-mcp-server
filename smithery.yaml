@@ -1,0 +1,67 @@
+name: ideogram-mcp-server
+version: 3.0.0
+
+# Build configuration
+build:
+  # Use the Dockerfile for build
+  dockerfile: Dockerfile
+  
+  # Build context
+  context: .
+  
+  # Build arguments (if needed)
+  args:
+    NODE_VERSION: "20"
+    PNPM_VERSION: "8"
+
+# Runtime configuration
+runtime:
+  # Port the application runs on
+  port: 3000
+  
+  # Environment variables
+  env:
+    NODE_ENV: production
+
+# Health check
+healthcheck:
+  path: /health
+  interval: 30s
+  timeout: 10s
+  retries: 3
+
+# Resource limits
+resources:
+  memory: "512Mi"
+  cpu: "0.5"
+
+# Dependencies and services needed
+dependencies:
+  - name: node
+    version: ">=20.0.0"
+  - name: pnpm
+    version: ">=8.0.0"
+
+# Build stages
+stages:
+  - name: install
+    command: pnpm install --frozen-lockfile
+    
+  - name: build
+    command: pnpm run build
+    depends_on: [install]
+    
+  - name: test
+    command: pnpm test
+    depends_on: [build]
+    optional: true
+
+# Deployment configuration
+deploy:
+  strategy: rolling
+  replicas: 1
+  
+# Monitoring
+monitoring:
+  enabled: true
+  metrics_path: /metrics
