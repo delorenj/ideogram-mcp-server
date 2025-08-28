@@ -21,7 +21,8 @@ export function createUpscaleTool(apiClient: IdeogramApiClient, fileManager: Fil
     name: 'upscale',
     description: 'Upscale images to higher resolution using Ideogram upscaling technology',
     parameters: upscaleSchema,
-    execute: async (args: z.infer<typeof upscaleSchema>): Promise<string> => {
+    execute: async (args: unknown): Promise<string> => {
+      const validatedArgs = upscaleSchema.parse(args);
       try {
         // Read and validate image file
         const imageResult = await fileManager.readImageFile(args.image_file);
