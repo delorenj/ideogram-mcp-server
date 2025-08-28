@@ -22,12 +22,23 @@ export function createReplaceBackgroundTool(apiClient: IdeogramApiClient, fileMa
   return {
     name: 'replace_background',
     description: 'Replace the background of images with new scenes using Ideogram v3',
-    parameters: replaceBackgroundSchema,
+    parameters: {
+      type: 'object',
+      properties: {
+        image_file: { type: 'string', description: 'Path to the image file to process' },
+        prompt: { type: 'string', description: 'Description of the new background scene' },
+        model: { type: 'string', enum: ['V_1', 'V_2', 'V_2_TURBO'], description: 'Model version to use' },
+        magic_prompt_option: { type: 'string', enum: ['AUTO', 'ON', 'OFF'], description: 'Magic prompt enhancement' },
+        seed: { type: 'number', minimum: 0, maximum: 2147483647, description: 'Random seed for reproducibility' },
+        num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
+      },
+      required: ['image_file', 'prompt']
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = replaceBackgroundSchema.parse(args);
       try {
         // Read and validate image file
-        const imageResult = await fileManager.readImageFile(args.image_file);
+        const imageResult = await fileManager.readImageFile(validatedArgs.image_file);
         if (!imageResult.success || !imageResult.data) {
           return `❌ Failed to read image file: ${imageResult.error}`;
         }
@@ -35,11 +46,11 @@ export function createReplaceBackgroundTool(apiClient: IdeogramApiClient, fileMa
         // Create FormData for multipart upload
         const formData = new FormData();
         formData.append('image_request', JSON.stringify({
-          prompt: args.prompt,
-          model: args.model || 'V_2',
-          magic_prompt_option: args.magic_prompt_option || 'AUTO',
-          seed: args.seed,
-          num_images: args.num_images || 1
+          prompt: validatedArgs.prompt,
+          model: validatedArgs.model || 'V_2',
+          magic_prompt_option: validatedArgs.magic_prompt_option || 'AUTO',
+          seed: validatedArgs.seed,
+          num_images: validatedArgs.num_images || 1
         }));
         formData.append('image_file', imageResult.data, {
           filename: 'image.jpg',
@@ -68,10 +79,10 @@ export function createReplaceBackgroundTool(apiClient: IdeogramApiClient, fileMa
           if (image.is_image_safe === false) {
             result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
           }
-          result += `🌄 **New Background**: ${args.prompt}\n`;
-          result += `🎨 **Model**: ${args.model || 'V_2'}\n`;
-          if (args.seed) {
-            result += `🌱 **Seed**: ${args.seed}\n`;
+          result += `🌄 **New Background**: ${validatedArgs.prompt}\n`;
+          result += `🎨 **Model**: ${validatedArgs.model || 'V_2'}\n`;
+          if (validatedArgs.seed) {
+            result += `🌱 **Seed**: ${validatedArgs.seed}\n`;
           }
           result += '\n';
         });
