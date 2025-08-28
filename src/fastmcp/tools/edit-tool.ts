@@ -57,7 +57,7 @@ export function createEditTool(apiClient: IdeogramApiClient, fileManager: FileMa
         });
 
         // Make API request with FormData
-        const response = await apiClient.post<ImageEditResponse>('/edit', formData, {
+        const response = await apiClient.post<ImageEditResponse>('/ideogram-v3/edit', formData, {
           'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`
         });
 
