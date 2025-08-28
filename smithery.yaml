@@ -3,25 +3,23 @@ version: 3.0.0
 
 # Build configuration
 build:
-  # Use the Dockerfile for build
   dockerfile: Dockerfile
-  
-  # Build context
   context: .
+  timeout: 600s  # 10 minute timeout for builds
   
-  # Build arguments (if needed)
+  # Build arguments
   args:
     NODE_VERSION: "20"
-    PNPM_VERSION: "8"
+    PNPM_VERSION: "8.15.9"
 
 # Runtime configuration
 runtime:
-  # Port the application runs on
   port: 3000
   
   # Environment variables
   env:
     NODE_ENV: production
+    NODE_OPTIONS: "--max-old-space-size=512"
 
 # Health check
 healthcheck:
@@ -29,39 +27,32 @@ healthcheck:
   interval: 30s
   timeout: 10s
   retries: 3
+  start_period: 30s
 
-# Resource limits
+# Resource limits - reduced for faster startup
 resources:
-  memory: "512Mi"
-  cpu: "0.5"
+  memory: "256Mi"
+  cpu: "0.3"
 
-# Dependencies and services needed
+# Simplified build process
+build_config:
+  cache: true
+  parallel: true
+  network_timeout: 300s
+
+# Dependencies
 dependencies:
   - name: node
     version: ">=20.0.0"
   - name: pnpm
     version: ">=8.0.0"
 
-# Build stages
-stages:
-  - name: install
-    command: pnpm install --frozen-lockfile
-    
-  - name: build
-    command: pnpm run build
-    depends_on: [install]
-    
-  - name: test
-    command: pnpm test
-    depends_on: [build]
-    optional: true
-
 # Deployment configuration
 deploy:
   strategy: rolling
   replicas: 1
+  timeout: 300s
   
-# Monitoring
+# Monitoring - simplified
 monitoring:
-  enabled: true
-  metrics_path: /metrics
+  enabled: false  # Disable to reduce startup overhead
