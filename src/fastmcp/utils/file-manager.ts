@@ -3,8 +3,8 @@
  * Enhanced file operations with validation and parallel processing
  */
 
-import fs from 'fs/promises';
-import path from 'path';
+import * as fs from 'fs/promises';
+import * as path from 'path';
 import { IdeogramApiClient } from './api-client.js';
 import { DownloadResult } from '../types/index.js';
 
