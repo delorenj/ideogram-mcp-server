@@ -38,7 +38,7 @@ export function createGenerateTool(apiClient: IdeogramApiClient) {
         };
 
         // Make API request
-        const response = await apiClient.post<ImageGenerationResponse>('/generate', payload);
+        const response = await apiClient.post<ImageGenerationResponse>('/ideogram-v3/generate', payload);
 
         if (!response.success) {
           return `❌ Generation failed: ${response.error}`;
