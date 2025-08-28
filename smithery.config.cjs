@@ -23,7 +23,8 @@ module.exports = {
     // External packages that cause bundling issues
     'effect',
     'sury', 
-    '@valibot/to-json-schema'
+    '@valibot/to-json-schema',
+    'xsschema'
   ],
   
   // Build options
