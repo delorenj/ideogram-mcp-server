@@ -22,7 +22,22 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
   return {
     name: 'reframe',
     description: 'Reframe existing images to different aspect ratios using Ideogram v3',
-    parameters: reframeSchema,
+    parameters: {
+      type: 'object',
+      properties: {
+        image_file: { type: 'string', description: 'Path to the image file to reframe' },
+        aspect_ratio: { 
+          type: 'string', 
+          enum: ['ASPECT_1_1', 'ASPECT_16_9', 'ASPECT_9_16', 'ASPECT_4_3', 'ASPECT_3_4'],
+          description: 'Target aspect ratio for the reframed image'
+        },
+        model: { type: 'string', enum: ['V_1', 'V_2', 'V_2_TURBO'], description: 'Model version to use' },
+        magic_prompt_option: { type: 'string', enum: ['AUTO', 'ON', 'OFF'], description: 'Magic prompt enhancement' },
+        seed: { type: 'number', minimum: 0, maximum: 2147483647, description: 'Random seed for reproducibility' },
+        num_images: { type: 'number', minimum: 1, maximum: 8, description: 'Number of images to generate' }
+      },
+      required: ['image_file', 'aspect_ratio']
+    } as const,
     execute: async (args: unknown): Promise<string> => {
       const validatedArgs = reframeSchema.parse(args);
       try {
@@ -35,11 +50,11 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
         // Create FormData for multipart upload
         const formData = new FormData();
         formData.append('image_request', JSON.stringify({
-          aspect_ratio: args.aspect_ratio,
-          model: args.model || 'V_2',
-          magic_prompt_option: args.magic_prompt_option || 'AUTO',
-          seed: args.seed,
-          num_images: args.num_images || 1
+          aspect_ratio: validatedArgs.aspect_ratio,
+          model: validatedArgs.model || 'V_2',
+          magic_prompt_option: validatedArgs.magic_prompt_option || 'AUTO',
+          seed: validatedArgs.seed,
+          num_images: validatedArgs.num_images || 1
         }));
         formData.append('image_file', imageResult.data, {
           filename: 'image.jpg',
@@ -60,7 +75,7 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
         }
 
         // Format response
-        let result = `✅ Successfully reframed image to ${args.aspect_ratio} and generated ${response.data.data.length} result(s):\n\n`;
+        let result = `✅ Successfully reframed image to ${validatedArgs.aspect_ratio} and generated ${response.data.data.length} result(s):\n\n`;
         
         response.data.data.forEach((image, index) => {
           result += `**Reframed Image ${index + 1}:**\n`;
@@ -68,10 +83,10 @@ export function createReframeTool(apiClient: IdeogramApiClient, fileManager: Fil
           if (image.is_image_safe === false) {
             result += `⚠️ **Safety**: Content flagged as potentially unsafe\n`;
           }
-          result += `📏 **Aspect Ratio**: ${args.aspect_ratio}\n`;
-          result += `🎨 **Model**: ${args.model || 'V_2'}\n`;
-          if (args.seed) {
-            result += `🌱 **Seed**: ${args.seed}\n`;
+          result += `📏 **Aspect Ratio**: ${validatedArgs.aspect_ratio}\n`;
+          result += `🎨 **Model**: ${validatedArgs.model || 'V_2'}\n`;
+          if (validatedArgs.seed) {
+            result += `🌱 **Seed**: ${validatedArgs.seed}\n`;
           }
           result += '\n';
         });
